@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from rest_framework.fields import SerializerMethodField, IntegerField
-from rest_framework.relations import SlugRelatedField
+
 
 from cinema.models import (
     Genre,
@@ -95,8 +94,8 @@ class MovieSessionListSerializer(serializers.ModelSerializer):
 
 
 class MovieSessionDetailSerializer(MovieSessionSerializer):
-    movie = MovieListSerializer(many=False)
-    cinema_hall = CinemaHallSerializer(many=False)
+    movie = MovieListSerializer()
+    cinema_hall = CinemaHallSerializer()
 
     class Meta:
         model = MovieSession
@@ -107,7 +106,7 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ("id", "created_at", "user")
-        read_only_fields = ["id", "created_at"]
+        read_only_fields = ["created_at"]
 
 
 class TicketsSerializer(serializers.ModelSerializer):
